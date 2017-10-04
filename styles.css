@@ -1,8 +1,8 @@
 .article {
-   border: 1px solid black;
-   color: goldenrod; 
+   border: 1px solid #ffdead;
+   color: navy; 
 }
 
 #intro {
-  font-size: 18px;
+  font-size: 3em;
 }
