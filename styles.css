@@ -1,4 +1,4 @@
-.article {
+.article, h1 {
    border: 1px solid #dd550c;
    color: #03244d; 
 }
