@@ -1,0 +1,19 @@
+#footer {
+    font-size: .5em;
+    border-top: 1px solid lightgrey;
+}
+
+#jumbotron {
+    background-color: #ffa500;
+    color: white;
+    font-family: Roboto Condensed, sans-serif;
+}
+
+#nav {
+    background-color: #03244d;
+
+}
+
+#nameHeader {
+    font-size: 4.5em;
+}
