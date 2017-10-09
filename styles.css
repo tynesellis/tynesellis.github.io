@@ -9,6 +9,8 @@
     font-family: Roboto Condensed, sans-serif;
 }
 
+
+
 #nav {
     background-color: #03244d;
 
@@ -46,5 +48,9 @@
     #pullQuote {
         display: none;
     }
+    .headerText {
+        clear: both;
+    }
+
 }
 
