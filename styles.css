@@ -43,9 +43,8 @@
  }
 
 @media screen and (max-width: 370px) {
-    #headShot, #pullQuote {
+    #pullQuote {
         display: none;
     }
-
 }
 
