@@ -19,7 +19,12 @@ let linkedin = {
     userName: "@tynesellis"
 }
 
-let contactDB = [email, twitter, linkedin];
+let contactArray = [email, twitter, linkedin];
+let contactDB = {
+    "email": email,
+    "twitter": twitter,
+    "linkedin": linkedin
+}
 
 const conactDBString = JSON.stringify(contactDB);
 localStorage.setItem("contactsString", conactDBString);
