@@ -38,4 +38,4 @@ for (let arr in retrievedContactsDB) {
                 <li>${currentObject.service}: <a href=${currentObject.URL}>${currentObject.userName}</a></li>
                 <hr>
         `  
-}
+}  
