@@ -9,7 +9,9 @@
     font-family: Roboto Condensed, sans-serif;
 }
 
-
+#projects {
+    box-shadow: 10px 5px 5px grey;
+}
 
 #nav {
     background-color: #03244d;
