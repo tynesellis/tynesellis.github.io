@@ -9,8 +9,15 @@
     font-family: Roboto Condensed, sans-serif;
 }
 
-#projects {
+.boxShadow {
     box-shadow: 10px 5px 5px grey;
+    
+}
+.contentBoxes {
+    box-shadow: 10px 5px 5px grey;
+    border: .5px solid rgba(128,128,128,.1);
+    border-radius: 5px;
+    padding: .75em 1em;
 }
 
 #nav {
