@@ -7,11 +7,11 @@ const howManyPages = Math.ceil(numberOfBlogs / blogsPerPage);//calculate how man
 
 // -------------------------pagination construction------------------------------------
 let paginationContent = "<ul class='d-flex flex-row' id='paginate'>";//start the ul that will contain the pageinator
-paginationContent += "<button id='back'>&lt;</button>";//add the back button
+paginationContent += "<a href='#' id='back'>&lt;</a>";//add the back button
 for (var i = 0; i < howManyPages; i++) {//add a numbered button for each page available
-    paginationContent += `<li><button class="blog-pages page-${i+1}">${i+1}</button></li>`
+    paginationContent += `<li><a href="#" class="blog-pages page-${i+1}">${i+1}</a></li>`
 }
-paginationContent += "<button id='next' class='page-2'>&gt;</button>";//add next button
+paginationContent += "<a href= '#' id='next' class='page-2'>&gt;</a>";//add next button
 paginationContent += "</ul>";//close it up
 
 blogPagenatorHTML.innerHTML = paginationContent;//write it to the page
@@ -43,7 +43,27 @@ function addBlogz(event) {
         nextHTML.style.display = "inline-block";
         nextHTML.className = `page-${buttonNumber+1}`
     }
+  //--------------write to page---------------
+    const blogsToDisplay = retrievedBlogDB.slice(
+        (buttonNumber - 1) * blogsPerPage, 
+        buttonNumber * blogsPerPage
+    )
+
+    for (let l = 0; l < blogsToDisplay.length; l++) {
+        let currentBlog = blogsToDisplay[l];
+        bloggyHTML.innerHTML += `
+            <h1>${currentBlog.name}</h1>
+            <h2>Date: ${currentBlog.published}</h2>
+            <article>${currentBlog.text}</article>
+        `
+    }
+
+
+
 }
+
+   
+
 
 // ---------------------End On Click Function-----------------------------
 
@@ -59,5 +79,14 @@ for (let b = 0; b < blogPageButtons.length; b++) {
     thisButton.addEventListener("click", addBlogz, false)
 }
 
+addBlogz({
+    "target": {
+        "innerHTML": "1"
+    }
+})
+
+backHTML.addEventListener("click", addBlogz)
+nextHTML.addEventListener("click", addBlogz)
 
 //--------------End Event Listener--------------------------
+
