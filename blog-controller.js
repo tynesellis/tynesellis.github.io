@@ -7,7 +7,7 @@ const howManyPages = Math.ceil(numberOfBlogs / blogsPerPage);//calculate how man
 
 // -------------------------pagination construction------------------------------------
 let paginationContent = "<ul class='d-flex flex-row' id='paginate'>";//start the ul that will contain the pageinator
-paginationContent += "<a href='#' id='back'>&lt;</a>";//add the back button
+paginationContent += "<a href='#' id='back' class=''>&lt;</a>";//add the back button
 for (var i = 0; i < howManyPages; i++) {//add a numbered button for each page available
     paginationContent += `<li><a href="#" class="blog-pages page-${i+1}">${i+1}</a></li>`
 }
@@ -26,7 +26,7 @@ const nextHTML = document.getElementById("next");
 
 function addBlogz(event) {
     bloggyHTML.innerHTML = "";//clear out whatever is on the page
-    const buttonNumber = parseInt(event.target.innerHTML);//get the number of the button clicked
+    const buttonNumber = event.target;//get the number of the button clicked
     console.log(buttonNumber)
     
     //-----change class and/or display of back button
@@ -80,11 +80,11 @@ for (let b = 0; b < blogPageButtons.length; b++) {
     thisButton.addEventListener("click", addBlogz, false)
 }
 
-addBlogz({
-    "target": {
-        "innerHTML": "1"
-    }
-})
+// addBlogz({
+//     "target": {
+//         "innerHTML": "1"
+//     }
+// })
 
 backHTML.addEventListener("click", addBlogz)
 nextHTML.addEventListener("click", addBlogz)
