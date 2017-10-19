@@ -2,7 +2,7 @@ const retrievedBlogDB = JSON.parse(localStorage.getItem("blogString"));//get blo
 const bloggyHTML = document.getElementById("articles");//target section for blogs
 const blogPagenatorHTML = document.getElementById("blogPageinator");//target section for pageinator
 const numberOfBlogs = retrievedBlogDB.length;//How many blogs there are
-const blogsPerPage = 2;//how many we want to display at a time
+const blogsPerPage = 1;//how many we want to display at a time
 const howManyPages = Math.ceil(numberOfBlogs / blogsPerPage);//calculate how many pages there will be of blogs
 
 // -------------------------pagination construction------------------------------------
@@ -26,14 +26,15 @@ const nextHTML = document.getElementById("next");
 
 function addBlogz(event) {
     bloggyHTML.innerHTML = "";//clear out whatever is on the page
-    const buttonNumber = event.target.innerHTML;//get the number of the button clicked
+    const buttonNumber = parseInt(event.target.innerHTML);//get the number of the button clicked
     console.log(buttonNumber)
+    
     //-----change class and/or display of back button
-    if ((buttonNumber - 1) === 0) {
+    if (buttonNumber === 1) {
         backHTML.style.display = "none";
     } else {
         backHTML.style.display = "inline-block";
-        backHTML.className = `page-${buttonNumber-1}`
+        backHTML.className = `page-${buttonNumber - 1}`
     }
         //-----change class and/or display of back button
 
@@ -41,7 +42,7 @@ function addBlogz(event) {
         nextHTML.style.display = "none";
     } else {
         nextHTML.style.display = "inline-block";
-        nextHTML.className = `page-${buttonNumber+1}`
+        nextHTML.className = `page-${buttonNumber + 1}`
     }
   //--------------write to page---------------
     const blogsToDisplay = retrievedBlogDB.slice(
