@@ -26,31 +26,30 @@ const nextHTML = document.getElementById("next");
 
 function addBlogz(event) {
     bloggyHTML.innerHTML = "";//clear out whatever is on the page
-    const buttonNumber = event.target;//get the number of the button clicked
-    console.log(buttonNumber)
-    
+    const buttonNumber = parseInt(Array.from(event.target.classList).find(buttonClass => {if (buttonClass.startsWith("page-"))return buttonClass}).split("-")[1]//get the number of the button clicked and Steve's invitation to visit MDN
+    );
     //-----change class and/or display of back button
-    if (buttonNumber === 1) {
+    if (buttonNumber === 1) {//if your're on button one, make the back arrow hide
         backHTML.style.display = "none";
     } else {
-        backHTML.style.display = "inline-block";
+        backHTML.style.display = "inline-block";// if you're on any button other than one, display back arrow and set page class to previous page
         backHTML.className = `page-${buttonNumber - 1}`
     }
         //-----change class and/or display of back button
 
-    if ((buttonNumber + 1) > howManyPages) {
+    if ((buttonNumber + 1) > howManyPages) {//if your're on the last button, make the next arrow hide
         nextHTML.style.display = "none";
     } else {
-        nextHTML.style.display = "inline-block";
+        nextHTML.style.display = "inline-block";// if you're on any button other than the last one, display next arrow and set page class to next page
         nextHTML.className = `page-${buttonNumber + 1}`
     }
   //--------------write to page---------------
-    const blogsToDisplay = retrievedBlogDB.slice(
-        (buttonNumber - 1) * blogsPerPage, 
-        buttonNumber * blogsPerPage
+    const blogsToDisplay = retrievedBlogDB.slice(//set the blogs you want to display
+        (buttonNumber - 1) * blogsPerPage, //buttonNumber, drawn from class name - 1, since it's an array * however many we want -- set above
+        buttonNumber * blogsPerPage//stopping point
     )
 
-    for (let l = 0; l < blogsToDisplay.length; l++) {
+    for (let l = 0; l < blogsToDisplay.length; l++) {//write to the DOM
         let currentBlog = blogsToDisplay[l];
         bloggyHTML.innerHTML += `
             <h1>${currentBlog.name}</h1>
@@ -80,11 +79,11 @@ for (let b = 0; b < blogPageButtons.length; b++) {
     thisButton.addEventListener("click", addBlogz, false)
 }
 
-// addBlogz({
-//     "target": {
-//         "innerHTML": "1"
-//     }
-// })
+addBlogz({
+    "target": {
+        "classList": ["page-1"]
+    }
+})
 
 backHTML.addEventListener("click", addBlogz)
 nextHTML.addEventListener("click", addBlogz)
