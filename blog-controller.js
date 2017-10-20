@@ -26,13 +26,16 @@ const nextHTML = document.getElementById("next");
 
 function addBlogz(event) {
     bloggyHTML.innerHTML = "";//clear out whatever is on the page
-    const buttonNumber = parseInt(Array.from(event.target.classList).find(buttonClass => {if (buttonClass.startsWith("page-"))return buttonClass}).split("-")[1]//get the number of the button clicked and Steve's invitation to visit MDN
+    const buttonNumber = parseInt(//get the number of the button clicked and Steve's invitation to visit MDN
+        Array.from(event.target.classList)//make an array from returned classList
+        .find(buttonClass => {if (buttonClass.startsWith("page-"))return buttonClass})//find any "page-" class
+        .split("-")[1]//extract the number, which is the number of the button
     );
     //-----change class and/or display of back button
     if (buttonNumber === 1) {//if your're on button one, make the back arrow hide
         backHTML.style.display = "none";
     } else {
-        backHTML.style.display = "inline-block";// if you're on any button other than one, display back arrow and set page class to previous page
+        backHTML.style.display = "inline";// if you're on any button other than one, display back arrow and set page class to previous page
         backHTML.className = `page-${buttonNumber - 1}`
     }
         //-----change class and/or display of back button
@@ -40,7 +43,7 @@ function addBlogz(event) {
     if ((buttonNumber + 1) > howManyPages) {//if your're on the last button, make the next arrow hide
         nextHTML.style.display = "none";
     } else {
-        nextHTML.style.display = "inline-block";// if you're on any button other than the last one, display next arrow and set page class to next page
+        nextHTML.style.display = "inline";// if you're on any button other than the last one, display next arrow and set page class to next page
         nextHTML.className = `page-${buttonNumber + 1}`
     }
   //--------------write to page---------------
