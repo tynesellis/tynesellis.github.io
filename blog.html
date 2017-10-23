@@ -45,8 +45,36 @@
                 <h5 class="text-muted headerText">Thoughts from this week's episode of <em>NSS</em></h5>
               </header>
             
-            <section id="articles">
+              <!-- Add blog modal -->
+              <div class="modal" tabindex="-1" role="dialog" id="bloggyBlog">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">New Blog</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body d-flex flex-column">
+                      <input id="newBlogTitle" placeholder="Blog Title Here"></input>
+                      <textarea id="newBlogText" placeholder="New Blog Here"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" id ="addBlog" class="btn btn-primary">Add blog</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bloggyBlog">
+                Add a blog
+              </button>
+              <!-- end Add blog modal -->
+
+            <section class="pb-5"id="articles">
               <!-- new articles to go here --> 
+            
+            
           </section>
       </div>
       <footer id="footer" class="container-fluid fixed-bottom text-center bg-light ">

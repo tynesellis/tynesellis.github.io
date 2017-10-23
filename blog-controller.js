@@ -93,3 +93,14 @@ nextHTML.addEventListener("click", addBlogz)
 
 //--------------End Event Listener--------------------------
 
+
+const newBlogButton = document.getElementById("addBlog")
+
+function newBlog() {
+    // const addedBlogTitle = document.getElementById("newBLogTitle").val;
+    console.log("test");
+
+}
+
+
+newBlogButton.addEventListener("click", newBlog, false)
