@@ -13,3 +13,7 @@
 #blogPageinator {
     font-size: 3em;
 }
+
+#bloggyBlog input, textarea {
+    margin: 1em;
+}
