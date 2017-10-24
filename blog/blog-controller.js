@@ -92,36 +92,3 @@ nextHTML.addEventListener("click", addBlogz)
 
 //--------------End Event Listener--------------------------
 
-//get new blogs from modal input and add them to DB
-
-const generateBlog = function(title, date, text) {
-    return Object.create(null, {
-        "name": {
-            enumerable: true,
-            value: title
-        },
-        "published": {
-            enumerable: true,
-            value: date
-        },
-        "text": {
-            enumerable: true,
-            value: text
-        }
-    })
-};
-
-document.getElementById("addBlog").addEventListener("click", function(event){
-    const addedBlogTitle = document.getElementById("newBlogTitle").value;
-    const addedBlogText = document.getElementById("newBlogText").value;
-    const addedBlogDate = document.getElementById("newBlogDate").value;
-    const newestBlog = generateBlog(addedBlogTitle, addedBlogDate, addedBlogText);
-    retrievedBlogDB.unshift(newestBlog);
-    localStorage.setItem("blogString", JSON.stringify(retrievedBlogDB))
-    console.log(retrievedBlogDB)
-    addBlogz({
-        "target": {
-            "classList": ["page-1"]
-        }
-    })
-})
