@@ -52,14 +52,13 @@ function addBlogz(event) {
         buttonNumber * blogsPerPage//stopping point
     )
 
-    for (let l = 0; l < blogsToDisplay.length; l++) {//write to the DOM
-        let currentBlog = blogsToDisplay[l];
+    blogsToDisplay.forEach(function(currentBlog) {
         bloggyHTML.innerHTML += `
             <h1>${currentBlog.name}</h1>
             <h2>Date: ${currentBlog.published}</h2>
             <article>${currentBlog.text}</article>
         `
-    }
+    })
 
 
 
@@ -93,36 +92,3 @@ nextHTML.addEventListener("click", addBlogz)
 
 //--------------End Event Listener--------------------------
 
-//get new blogs from modal input and add them to DB
-
-const generateBlog = function(title, date, text) {
-    return Object.create(null, {
-        "name": {
-            enumerable: true,
-            value: title
-        },
-        "published": {
-            enumerable: true,
-            value: date
-        },
-        "text": {
-            enumerable: true,
-            value: text
-        }
-    })
-};
-
-document.getElementById("addBlog").addEventListener("click", function(event){
-    const addedBlogTitle = document.getElementById("newBlogTitle").value;
-    const addedBlogText = document.getElementById("newBlogText").value;
-    const addedBlogDate = document.getElementById("newBlogDate").value;
-    const newestBlog = generateBlog(addedBlogTitle, addedBlogDate, addedBlogText);
-    retrievedBlogDB.unshift(newestBlog);
-    localStorage.setItem("blogString", JSON.stringify(retrievedBlogDB))
-    console.log(retrievedBlogDB)
-    addBlogz({
-        "target": {
-            "classList": ["page-1"]
-        }
-    })
-})
