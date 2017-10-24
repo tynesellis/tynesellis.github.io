@@ -20,7 +20,7 @@
     
 }
 .contentBoxes {
-    box-shadow: 10px 5px 5px grey;
+    box-shadow: 10px 5px 20px grey;
     border: .5px solid rgba(128,128,128,.1);
     border-radius: 5px;
     padding: .75em 1em;

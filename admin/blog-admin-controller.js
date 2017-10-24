@@ -20,10 +20,14 @@ const generateBlog = function(title, date, text) {//factory for blog objects tha
 };
 
 document.getElementById("addBlog").addEventListener("click", function(event){//listen for click on the button that opens a new blog form
-    const addedBlogTitle = document.getElementById("newBlogTitle").value;//get what was typed into title
-    const addedBlogText = document.getElementById("newBlogText").value;//get date that was selected
-    const addedBlogDate = document.getElementById("newBlogDate").value;//get text that was typed into blog
-    const newestBlog = generateBlog(addedBlogTitle, addedBlogDate, addedBlogText);//pass values above into blog factory
+    let addedBlogTitle = document.getElementById("newBlogTitle");//get what was typed into title
+    let addedBlogText = document.getElementById("newBlogText");//get date that was selected
+    let addedBlogDate = document.getElementById("newBlogDate");//get text that was typed into blog
+    const newestBlog = generateBlog(addedBlogTitle.value, addedBlogDate.value, addedBlogText.value);//pass values above into blog factory
     retrievedBlogDBAdmin.unshift(newestBlog);//push the new blog to the front of the line in the blog array
-    localStorage.setItem("blogString", JSON.stringify(retrievedBlogDBAdmin))//send the updated array back to storage
+    localStorage.setItem("blogString", JSON.stringify(retrievedBlogDBAdmin));//send the updated array back to storage
+    console.log(retrievedBlogDBAdmin)
+    addedBlogTitle.value = "";
+    addedBlogText.value = "";
+    addedBlogDate.value = "";
 })
