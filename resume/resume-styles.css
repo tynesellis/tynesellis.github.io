@@ -1,0 +1,24 @@
+
+.resumeTags {
+    padding: .25em;
+    color: #03244d;
+    
+}
+#email {
+    padding: 0;
+    color: darkslategray;    
+}
+#resume h3 {
+    color: #03244d;
+    text-decoration: underline;
+}
+#resume h4 {
+    background-color: rgba(3,36,77, 0.3);
+}
+.sectionHeads, #resumeHead h1 {
+    background-color: #03244d;
+    color: white;
+    border-radius: 5px;
+
+}
+
