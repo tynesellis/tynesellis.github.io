@@ -52,14 +52,13 @@ function addBlogz(event) {
         buttonNumber * blogsPerPage//stopping point
     )
 
-    for (let l = 0; l < blogsToDisplay.length; l++) {//write to the DOM
-        let currentBlog = blogsToDisplay[l];
+    blogsToDisplay.forEach(function(currentBlog) {
         bloggyHTML.innerHTML += `
             <h1>${currentBlog.name}</h1>
             <h2>Date: ${currentBlog.published}</h2>
             <article>${currentBlog.text}</article>
         `
-    }
+    })
 
 
 
