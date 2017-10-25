@@ -1,4 +1,9 @@
-
+#resume {
+    background-color: rgba(255,255,255, 0.95);
+    box-shadow: 10px 5px 20px grey;
+    padding-bottom: 5em;
+    border-radius: 15px; 
+}
 .resumeTags {
     padding: .25em;
     color: #03244d;
