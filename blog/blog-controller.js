@@ -22,7 +22,7 @@ const backHTML = document.getElementById("back"); //these target back and next b
 const nextHTML = document.getElementById("next");
 // ---------End Front and back buttons--------------
 
-// ---------------------On Click Function-----------------------------
+// ---------------------Pagination On Click Function-----------------------------
 
 function addBlogz(event) {
     bloggyHTML.innerHTML = "";//clear out whatever is on the page
@@ -64,15 +64,10 @@ function addBlogz(event) {
 
 }
 
-   
-
-
 // ---------------------End On Click Function-----------------------------
 
 
-
-
-//--------------Event Listener--------------------------
+//--------------Pagination Event Listener--------------------------
 
 const blogPageButtons = document.getElementsByClassName("blog-pages");//get array of the buttons for the pages
 
@@ -81,14 +76,29 @@ for (let b = 0; b < blogPageButtons.length; b++) {
     thisButton.addEventListener("click", addBlogz, false)
 }
 
-addBlogz({
-    "target": {
-        "classList": ["page-1"]
-    }
-})
-
 backHTML.addEventListener("click", addBlogz)
 nextHTML.addEventListener("click", addBlogz)
 
 //--------------End Event Listener--------------------------
 
+//Search blogs============================================
+document.getElementById("searchBlogs").addEventListener("keyup", function(){
+    let searchString = event.target.value;
+    if(searchString.length >= 3){
+        const searchResults = retrievedBlogDB.map(function(checkedBlog){
+            for (let key in checkedBlog){
+                if (key.includes(searchString)){
+                    console.log(checkedBlog)
+                }
+            }
+            
+        })
+    }
+})
+
+//run at beginning of page load============================
+addBlogz({
+    "target": {
+        "classList": ["page-1"]
+    }
+})
