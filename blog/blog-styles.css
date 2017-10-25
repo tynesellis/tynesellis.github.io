@@ -24,3 +24,9 @@
     padding: 1em 1em 5em 1em;
     border-radius: 15px;    
 }
+
+
+.searchedBlogResults  {
+    text-align: left;
+    margin-bottom: 1em;
+}

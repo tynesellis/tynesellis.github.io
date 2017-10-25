@@ -85,14 +85,24 @@ nextHTML.addEventListener("click", addBlogz)
 document.getElementById("searchBlogs").addEventListener("keyup", function(){
     let searchString = event.target.value;
     if(searchString.length >= 3){
-        const searchResults = retrievedBlogDB.map(function(checkedBlog){
-            for (let key in checkedBlog){
-                if (key.includes(searchString)){
-                    console.log(checkedBlog)
-                }
-            }
-            
+        const searchResults = retrievedBlogDB.filter(function(checkedBlog){
+          for (let key in checkedBlog){
+            if (checkedBlog[key].includes(searchString)){
+                return checkedBlog;
+            };    
+          }
         })
+        printedResults = ``;
+        searchResults.forEach(function(searchObj){
+            printedResults += `
+                <button class="searchedBlogResults contentBoxes">
+                <h4>${searchObj.name}</h4>
+                <h5 class="text-muted">Date: ${searchObj.published}</h5>
+                <article>${searchObj.text.substring(0,175)}...<em>click for more<em></article>
+                </button>
+            `
+        }) 
+        bloggyHTML.innerHTML = printedResults;
     }
 })
 
