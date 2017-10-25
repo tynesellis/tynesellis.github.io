@@ -1,0 +1,10 @@
+#contactList li {
+    margin-bottom: 2em;
+    border-bottom: .5px solid #03244d;
+    list-style-type: none;
+}
+
+#contact-info {
+    background-color: rgba(3,36,77, .9);
+    color: white;
+}
