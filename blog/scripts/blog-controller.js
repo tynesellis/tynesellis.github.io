@@ -54,9 +54,9 @@ function addBlogz(event) {
 
     blogsToDisplay.forEach(function(currentBlog) {
         bloggyHTML.innerHTML += `
-            <h1>${currentBlog.name}</h1>
-            <h2>Date: ${currentBlog.published}</h2>
-            <article>${currentBlog.text}</article>
+            <h1>${currentBlog.name.value}</h1>
+            <h2>Date: ${currentBlog.published.value}</h2>
+            <article>${currentBlog.text.value}</article>
         `
     })
 
@@ -87,18 +87,20 @@ document.getElementById("searchBlogs").addEventListener("keyup", function(){
     if(searchString.length >= 3){
         const searchResults = retrievedBlogDB.filter(function(checkedBlog){
           for (let key in checkedBlog){
-            if (checkedBlog[key].includes(searchString)){
-                return checkedBlog;
-            };    
+            if (toString(checkedBlog[key].value).includes(searchString)){
+                return checkedBlog; 
+            };  
           }
         })
+        console.log(searchResults)  
+        
         printedResults = ``;
         searchResults.forEach(function(searchObj){
             printedResults += `
                 <button class="searchedBlogResults contentBoxes">
-                <h4>${searchObj.name}</h4>
-                <h5 class="text-muted">Date: ${searchObj.published}</h5>
-                <article>${searchObj.text.substring(0,175)}...<em>click for more<em></article>
+                <h4 id="${searchObj.blogID.value}">${searchObj.name.value}</h4>
+                <h5 class="text-muted">Date: ${searchObj.published.value}</h5>
+                <article>${searchObj.text.value.substring(0,175)}...<em>click for more<em></article>
                 </button>
             `
         }) 
