@@ -54,9 +54,9 @@ function addBlogz(event) {
 
     blogsToDisplay.forEach(function (currentBlog) {
         bloggyHTML.innerHTML += `
-            <h1>${currentBlog.name.value}</h1>
-            <h2>Date: ${currentBlog.published.value}</h2>
-            <article>${currentBlog.text.value}</article>
+            <h1>${currentBlog.name}</h1>
+            <h2>Date: ${currentBlog.published}</h2>
+            <article>${currentBlog.text}</article>
         `
     })
 
@@ -87,7 +87,7 @@ document.getElementById("searchBlogs").addEventListener("keyup", function () {
     if (searchString.length >= 3) {
         const searchResults = retrievedBlogDB.filter(function (checkedBlog) {
             for (let key in checkedBlog) {
-                if (checkedBlog[key].value.toString().toLowerCase().includes(searchString)) {
+                if (checkedBlog[key].toString().toLowerCase().includes(searchString)) {
                     return checkedBlog;
                 };
             }
@@ -96,10 +96,10 @@ document.getElementById("searchBlogs").addEventListener("keyup", function () {
         searchResults.forEach(function (searchObj) {
             printedResults += `
             <article class="searchedBlogResults contentBoxes">  
-                <h4>${searchObj.name.value}</h4>
-                <h5 class="text-muted">Date: ${searchObj.published.value}</h5>
-                <article>${searchObj.text.value.substring(0, 175)}...</article>
-                <button id="${searchObj.blogID.value}" class="contentBoxes">...Click for more</button>
+                <h4>${searchObj.name}</h4>
+                <h5 class="text-muted">Date: ${searchObj.published}</h5>
+                <article>${searchObj.text.substring(0, 175)}...</article>
+                <button id="${searchObj.blogID}" class="contentBoxes">...Click for more</button>
             </article>
             `
         })
@@ -111,11 +111,11 @@ document.getElementById("searchBlogs").addEventListener("keyup", function () {
             resultButton.addEventListener("click", function (event) {
                 bloggyHTML.innerHTML = "";//clear out whatever is on the page
                     retrievedBlogDB.forEach(function(blogObj){
-                        if (blogObj.blogID.value.toString() === event.target.id) {
+                        if (blogObj.blogID.toString() === event.target.id) {
                             bloggyHTML.innerHTML += `
-                            <h1>${blogObj.name.value}</h1>
-                            <h2>Date: ${blogObj.published.value}</h2>
-                            <article>${blogObj.text.value}</article>
+                            <h1>${blogObj.name}</h1>
+                            <h2>Date: ${blogObj.published}</h2>
+                            <article>${blogObj.text}</article>
                         `
                         }
                     })
