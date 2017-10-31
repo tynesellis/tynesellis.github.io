@@ -1,9 +1,23 @@
 const retrievedBlogDBAdmin = JSON.parse(localStorage.getItem("blogString"));//get blog DB from storage(array of objects)
 
+const blogIdGenerator = function* () {
+    let uniqueId = 7
+
+    while (true) {
+        yield uniqueId
+        uniqueId += 1
+    }
+}
+const blogIdFactory = blogIdGenerator()
+
 //get new blogs from modal input and add them to DB
 
-const generateBlog = function(title, date, text) {//factory for blog objects that match database structure
+const generateBlog = function(newID, title, date, text) {//factory for blog objects that match database structure
     return Object.create(null, {
+        "blogId": {
+            enumerable: true,
+            value: blogIdFactory.next().value
+        },
         "name": {
             enumerable: true,
             value: title
