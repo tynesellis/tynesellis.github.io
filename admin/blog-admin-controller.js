@@ -12,11 +12,11 @@ const blogIdFactory = blogIdGenerator()
 
 //get new blogs from modal input and add them to DB
 
-const generateBlog = function(newID, title, date, text) {//factory for blog objects that match database structure
+const generateBlog = function(title, date, text) {//factory for blog objects that match database structure
     return Object.create(null, {
-        "blogId": {
+        "blogID": {
             enumerable: true,
-            value: blogIdFactory.next().value
+            value: blogIdFactory.next().value,
         },
         "name": {
             enumerable: true,
@@ -45,3 +45,4 @@ document.getElementById("addBlog").addEventListener("click", function(event){//l
     addedBlogText.value = "";
     addedBlogDate.value = "";
 })
+
