@@ -12,28 +12,16 @@ const blogIdFactory = blogIdGenerator()
 
 //get new blogs from modal input and add them to DB
 
-const generateBlog = function(newID, title, date, text) {//factory for blog objects that match database structure
-    return Object.create(null, {
-        "blogId": {
-            enumerable: true,
-            value: blogIdFactory.next().value
-        },
-        "name": {
-            enumerable: true,
-            value: title
-        },
-        "published": {
-            enumerable: true,
-            value: date
-        },
-        "text": {
-            enumerable: true,
-            value: text
-        }
+const generateBlog = function (title, date, text) {//factory for blog objects that match database structure
+    return Object.create( {
+        "blogID": {enumerable: true, value: blogIdFactory.next().value},
+        "name": {enumerable: true, value: title},
+        "published": {enumerable: true, value: date},
+        "text": {enumerable: true, value: text}
     })
 };
 
-document.getElementById("addBlog").addEventListener("click", function(event){//listen for click on the button that opens a new blog form
+document.getElementById("addBlog").addEventListener("click", function (event) {//listen for click on the button that opens a new blog form
     let addedBlogTitle = document.getElementById("newBlogTitle");//get what was typed into title
     let addedBlogText = document.getElementById("newBlogText");//get date that was selected
     let addedBlogDate = document.getElementById("newBlogDate");//get text that was typed into blog
@@ -45,3 +33,4 @@ document.getElementById("addBlog").addEventListener("click", function(event){//l
     addedBlogText.value = "";
     addedBlogDate.value = "";
 })
+
