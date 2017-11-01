@@ -1,7 +1,7 @@
 const retrievedProjectsDB = JSON.parse(localStorage.getItem("projectsDBLocal")); //retrieve and parse from browser storage
 const projectsHTML = document.getElementById("projects"); //target area of DOM that converted data will be written
-const backButtonSection = document.getElementById("backItUp");
-backButtonSection.innerHTML = `<button id='backToAllProjects'>Back to full list</button>`;
+const backButtonHTML = document.getElementById("backItUp");//return to full list option during search
+const searchBar = document.getElementById("searchProjects");
 
 
 const loadAllProjects = function () {
@@ -23,9 +23,13 @@ const loadAllProjects = function () {
 loadAllProjects();
 //======================projects search===============================
 
-document.getElementById("searchProjects").addEventListener("keyup", function () {//listen for keyup event in searchProjects input box
+searchBar.addEventListener("keyup", function () {//listen for keyup event in searchProjects input box
     let searchString = event.target.value.toLowerCase();//get the value of what is typed and set it all to lowercase
-    if (searchString.length >= 3) {//set comparissons to start when three characters have been typed
+    if (event.target.value.length === 0) {//if user clears out search, reverts to original list
+        projectsHTML.innerHTML = "";
+        loadAllProjects()
+    }
+    if (searchString.length >= 3 || event.keyCode === 13) {//set comparissons to start when three characters have been typed or enter key pressed
         const searchResults = retrievedProjectsDB.filter(function (checkedProject) {//run filter on the array of projects in local storage
             for (let key in checkedProject) {//for each project object
                 if (checkedProject[key].toString().toLowerCase().includes(searchString)) {
@@ -40,12 +44,18 @@ document.getElementById("searchProjects").addEventListener("keyup", function () 
                                                     in each result that rewrites the section with just the selected blog--
                                                     see Search Results Event Listener below*/
             printedResults += `
-            <button class="contentBoxes" id="backToAllProjects">Back to All Projects</button>
             <article class="searchedProjectsResults container mt-1 pb-5 contentBoxes">
             <h3 class="project_name display-4"><span class="font-weight-bold">Project: </span>${searchObj.name}</h3>
             <button id="${searchObj.projectID}" class="contentBoxes">...Click for more</button> 
             </article>
             `
+        })
+        backButtonHTML.innerHTML = `<button class="contentBoxes" id="backToAllProjects">Back to all projects</button>`;
+        document.getElementById("backToAllProjects").addEventListener("click", function(){//listen for back button to be clicked
+            searchBar.value = "";
+            backButtonHTML.innerHTML = ""; //clear search bar                           
+            projectsHTML.innerHTML = "";//clear out whatever is on the page                            
+            loadAllProjects()//load the original full collection of objects
         })
         projectsHTML.innerHTML = printedResults;//write the results to the DOM
         //Search Results Event Listener
@@ -53,6 +63,7 @@ document.getElementById("searchProjects").addEventListener("keyup", function () 
         for (let b = 0; b < searchResultButtons.length; b++) {
             let resultButton = searchResultButtons[b];
             resultButton.addEventListener("click", function (event) {//listen for one of the buttons to be clicked
+                searchBar.value = "";//clear search bar
                 projectsHTML.innerHTML = "";//clear out whatever is on the page
                 //button above gives the option to see all the projects again - there will only ever be one
                 retrievedProjectsDB.forEach(function (projectObj) {//Look at the projects database
@@ -67,11 +78,7 @@ document.getElementById("searchProjects").addEventListener("keyup", function () 
                             <p class="project_location"><span class="font-weight-bold">Location: </span><a href="${projectObj.location}" target="_blank">GitHub</a></p>
                             </article>
                         `; 
-                        document.getElementById("backToAllProjects").addEventListener("click", function(){//listen for that button to be clicked
-                            backButtonSection.innerHTML = "";                            
-                            projectsHTML.innerHTML = "";//clear out whatever is on the page                            
-                            loadAllProjects()//load the original full collection of objects
-                        })
+                        
                         
                     }
                 })                
