@@ -1,5 +1,8 @@
 const retrievedProjectsDB = JSON.parse(localStorage.getItem("projectsDBLocal")); //retrieve and parse from browser storage
-let projectsHTML = document.getElementById("projects"); //target area of DOM that converted data will be written
+const projectsHTML = document.getElementById("projects"); //target area of DOM that converted data will be written
+const backButtonSection = document.getElementById("backItUp");
+backButtonSection.innerHTML = `<button id='backToAllProjects'>Back to full list</button>`;
+
 
 const loadAllProjects = function () {
     retrievedProjectsDB.forEach(function (currentObject) {//cycle through the array of objects
@@ -51,6 +54,7 @@ document.getElementById("searchProjects").addEventListener("keyup", function () 
             let resultButton = searchResultButtons[b];
             resultButton.addEventListener("click", function (event) {//listen for one of the buttons to be clicked
                 projectsHTML.innerHTML = "";//clear out whatever is on the page
+                //button above gives the option to see all the projects again - there will only ever be one
                 retrievedProjectsDB.forEach(function (projectObj) {//Look at the projects database
                     if (projectObj.projectID.toString() === event.target.id) {//print out the project that matches the id of the button clicked
                         projectsHTML.innerHTML += `
@@ -61,10 +65,10 @@ document.getElementById("searchProjects").addEventListener("keyup", function () 
                             <p class="project_tech"><span class="font-weight-bold">Technologies Used: </span>${projectObj.technologies}</p>                
                             <p class="project_contributors"><span class="font-weight-bold">Contributors: </span>${projectObj.contributors}</p>
                             <p class="project_location"><span class="font-weight-bold">Location: </span><a href="${projectObj.location}" target="_blank">GitHub</a></p>
-                            <button class="contentBoxes" id="backToAllProjects">Back to All Projects</button>
                             </article>
-                        `;  //button above gives the option to see all the projects again - there will only ever be one
+                        `; 
                         document.getElementById("backToAllProjects").addEventListener("click", function(){//listen for that button to be clicked
+                            backButtonSection.innerHTML = "";                            
                             projectsHTML.innerHTML = "";//clear out whatever is on the page                            
                             loadAllProjects()//load the original full collection of objects
                         })
