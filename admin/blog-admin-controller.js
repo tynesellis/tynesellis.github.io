@@ -4,6 +4,10 @@ const blogPagenatorHTML = document.getElementById("blogPageinator");//target sec
 const numberOfBlogs = retrievedBlogDBAdmin.length;//How many blogs there are
 const blogsPerPage = 1;//how many we want to display at a time
 const howManyPages = Math.ceil(numberOfBlogs / blogsPerPage);//calculate how many pages there will be of blogs
+let blogIDtoEdit = document.getElementById("editBlogID");//get date section of add/edit modal    
+let blogTitletoEdit = document.getElementById("editBlogTitle");//get title section of add/edit modal
+let blogTexttoEdit = document.getElementById("editBlogText");//get text section of add/edit modal
+let blogDatetoEdit = document.getElementById("editBlogDate");//get date section of add/edit modal
 
 
 // -------------------------pagination construction------------------------------------
@@ -184,17 +188,12 @@ document.getElementById("addBlog").addEventListener("click", function (event) {/
 
 //================listener events for edit buttons========================
     const blogEditButtons = document.getElementsByClassName("editBlog");//get array of the edit buttons
-    
+
     Array.from(blogEditButtons).forEach(function(button){
-        let blogIDtoEdit = document.getElementById("editBlogID");//get date section of add/edit modal    
-        let blogTitletoEdit = document.getElementById("editBlogTitle");//get title section of add/edit modal
-        let blogTexttoEdit = document.getElementById("editBlogText");//get text section of add/edit modal
-        let blogDatetoEdit = document.getElementById("editBlogDate");//get date section of add/edit modal
         button.addEventListener("click", function(event){
             let matchingBlog = retrievedBlogDBAdmin.find(blog =>
-            blog.blogID === event.target.id)
-            console.log(matchingBlog)
-            blogIDtoEdit.value = matchingBlog.BlogID;
+            blog.blogID == event.target.id)
+            blogIDtoEdit.value = matchingBlog.blogID;
             blogTitletoEdit.value = matchingBlog.name;
             blogDatetoEdit.value = matchingBlog.published;
             blogTexttoEdit.value = matchingBlog.text;
@@ -203,7 +202,10 @@ document.getElementById("addBlog").addEventListener("click", function (event) {/
 
 //edit functions ================================
 document.getElementById("submitEdit").addEventListener("click", function(event){
-
+    editedBlog = generateBlog(blogIDtoEdit.value, blogTitletoEdit.value, blogDatetoEdit.value, blogTexttoEdit.value);
+    blogToReplaceIndex = retrievedBlogDBAdmin.find(blog =>
+        editedBlog.id == blog.id
+    )
 })
 
 

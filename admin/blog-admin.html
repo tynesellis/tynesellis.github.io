@@ -41,7 +41,7 @@
           <header id="jumbotron" class="container jumbotron mb-3 boxShadow">
             <img id="headShot" class="img-rounded float-left mr-3" src="../images/hs-pic.jpg" height="80" width="auto">
             <h1 class="headerText">Welcome Admin</h1>
-            <h5 class="text-muted headerText">Add Blogs Below</h5>
+            <h5 class="text-muted headerText">Add or Edit Blogs Below</h5>
           </header>
           <!-- Edit blog modal -->
           <div class="modal" tabindex="-1" role="dialog" id="blogEditor">
@@ -54,7 +54,7 @@
                     </button>
                   </div>
                   <div class="modal-body d-flex flex-column">
-                    <h1 id="editBlogID"></h1>
+                    <input id="editBlogID" disabled></input>
                     <input type="text" id="editBlogTitle"></input>
                     <input type="text" id="editBlogDate"></input>
                     <textarea id="editBlogText" rows="15"></textarea>
@@ -110,5 +110,8 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
       <script src="./blog-admin-factory.js"></script>
       <script src="./blog-admin-controller.js"></script>
+      <script src="../blog/scripts/blog-factory.js"></script>
+      
+
     </body>
 </html>
