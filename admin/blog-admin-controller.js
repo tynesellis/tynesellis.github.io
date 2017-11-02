@@ -94,10 +94,10 @@ document.getElementById("searchBlogs").addEventListener("keyup", function () {
             for (let key in checkedBlog) {
                 if (checkedBlog[key].toString().toLowerCase().includes(searchString)) {
                     return checkedBlog;
-                };
+                }
             }
         })
-        printedResults = ``;
+        let printedResults = ``;
         searchResults.forEach(function (searchObj) {
             printedResults += `
             <article class="searchedBlogResults contentBoxes">  
@@ -173,14 +173,13 @@ const generateBlog = function (id, title, date, text) {//factory for blog object
 
 
 
-document.getElementById("addBlog").addEventListener("click", function (event) {//listen for click on the button that opens a new blog form
+document.getElementById("addBlog").addEventListener("click", function () {//listen for click on the button that opens a new blog form
     let addedBlogTitle = document.getElementById("newBlogTitle");//get title section of add/edit modal
     let addedBlogText = document.getElementById("newBlogText");//get text section of add/edit modal
     let addedBlogDate = document.getElementById("newBlogDate");//get date section of add/edit modal
     const newestBlog = generateBlog(blogIdFactory.next().value, addedBlogTitle.value, addedBlogDate.value, addedBlogText.value);//pass values above into blog factory
     retrievedBlogDBAdmin.unshift(newestBlog);//push the new blog to the front of the line in the blog array
     localStorage.setItem("blogString", JSON.stringify(retrievedBlogDBAdmin));//send the updated array back to storage
-    console.log(retrievedBlogDBAdmin)
     addedBlogTitle.value = "";
     addedBlogText.value = "";
     addedBlogDate.value = "";
@@ -202,10 +201,12 @@ document.getElementById("addBlog").addEventListener("click", function (event) {/
 
 //edit functions ================================
 document.getElementById("submitEdit").addEventListener("click", function(event){
-    editedBlog = generateBlog(blogIDtoEdit.value, blogTitletoEdit.value, blogDatetoEdit.value, blogTexttoEdit.value);
-    blogToReplaceIndex = retrievedBlogDBAdmin.find(blog =>
+    let editedBlog = generateBlog(blogIDtoEdit.value, blogTitletoEdit.value, blogDatetoEdit.value, blogTexttoEdit.value);
+    console.log(editedBlog)
+    let blogToReplaceIndex = retrievedBlogDBAdmin.findIndex(blog =>
         editedBlog.id == blog.id
     )
+    console.log(blogToReplaceIndex)
 })
 
 
