@@ -1,0 +1,30 @@
+{
+  "name": "tynesellis.github.io",
+  "version": "1.0.0",
+  "description": "Personal Site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tynesellis/tynesellis.github.io.git"
+  },
+  "author": "Paul Ellis <tynesellis@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tynesellis/tynesellis.github.io/issues"
+  },
+  "homepage": "https://github.com/tynesellis/tynesellis.github.io#readme",
+  "devDependencies": {
+    "eslint": "^4.10.0",
+    "eslint-config-google": "^0.9.1",
+    "eslint-grunt": "^1.0.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-uglify": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
+    "grunt-contrib-watch": "^1.0.0",
+    "gruntify-eslint": "^4.0.0"
+  },
+  "dependencies": {}
+}
