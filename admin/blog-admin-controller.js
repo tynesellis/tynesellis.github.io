@@ -138,38 +138,38 @@ addBlogz({
         "classList": ["page-1"]
     }
 })
-const blogIdGenerator = function* () {
-    let uniqueId = 7
+// const blogIdGenerator = function* () {
+//     let uniqueId = 7
 
-    while (true) {
-        yield uniqueId
-        uniqueId += 1
-    }
-}
-const blogIdFactory = blogIdGenerator()
+//     while (true) {
+//         yield uniqueId
+//         uniqueId += 1
+//     }
+// }
+// const blogIdFactory = blogIdGenerator()
 
-//get new blogs from modal input and add them to DB
+// //get new blogs from modal input and add them to DB
 
-const generateBlog = function (id, title, date, text) {//factory for blog objects that match database structure
-    return Object.create(null, {
-        "blogId": {
-            enumerable: true,
-            value: id
-        },
-        "name": {
-            enumerable: true,
-            value: title
-        },
-        "published": {
-            enumerable: true,
-            value: date
-        },
-        "text": {
-            enumerable: true,
-            value: text
-        }
-    })
-};
+// const generateBlog = function (id, title, date, text) {//factory for blog objects that match database structure
+//     return Object.create(null, {
+//         "blogId": {
+//             enumerable: true,
+//             value: id
+//         },
+//         "name": {
+//             enumerable: true,
+//             value: title
+//         },
+//         "published": {
+//             enumerable: true,
+//             value: date
+//         },
+//         "text": {
+//             enumerable: true,
+//             value: text
+//         }
+//     })
+// };
 
 
 
