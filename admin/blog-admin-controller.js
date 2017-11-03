@@ -29,7 +29,7 @@ const nextHTML = document.getElementById("next");
 
 // ---------------------Pagination On Click Function-----------------------------
 
-function addBlogz(event) {
+function addBlogzAdmin (event) {
     bloggyHTML.innerHTML = "";//clear out whatever is on the page
     const buttonNumber = parseInt(//get the number of the button clicked and Steve's invitation to visit MDN
         Array.from(event.target.classList)//make an array from returned classList
@@ -78,11 +78,11 @@ const blogPageButtons = document.getElementsByClassName("blog-pages");//get arra
 
 for (let b = 0; b < blogPageButtons.length; b++) {
     let thisButton = blogPageButtons[b];
-    thisButton.addEventListener("click", addBlogz, false)
+    thisButton.addEventListener("click", addBlogzAdmin, false)
 }
 
-backHTML.addEventListener("click", addBlogz)
-nextHTML.addEventListener("click", addBlogz)
+backHTML.addEventListener("click", addBlogzAdmin)
+nextHTML.addEventListener("click", addBlogzAdmin)
 
 //--------------End Event Listener--------------------------
 
@@ -116,6 +116,8 @@ document.getElementById("searchBlogs").addEventListener("keyup", function () {
             resultButton.addEventListener("click", function (event) {
                 bloggyHTML.innerHTML = "";//clear out whatever is on the page
                     retrievedBlogDBAdmin.forEach(function(blogObj){
+                        console.log(blogObj)
+                        console.log(event.target)
                         if (blogObj.blogID.toString() === event.target.id) {
                             bloggyHTML.innerHTML += `
                             <h1>${blogObj.name}</h1>
@@ -133,7 +135,7 @@ document.getElementById("searchBlogs").addEventListener("keyup", function () {
 
 
 //run at beginning of page load============================
-addBlogz({
+addBlogzAdmin({
     "target": {
         "classList": ["page-1"]
     }
