@@ -4,7 +4,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     eslint: {
-      all: ['admin/*.js', 'blog/scripts/*.js', 'contact/*.js', 'projects/*.js', 'resume/*.js',]
+      all: ['scripts/*.js']
     },
     watch: {
       scripts: {
