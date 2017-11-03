@@ -18,7 +18,7 @@ const blogIdFactory = blogIdGenerator()
 
 const generateBlog = function (id, title, date, text) {//factory for blog objects that match database structure
     return Object.create(null, {
-        "blogId": {
+        "blogID": {
             enumerable: true,
             value: id
         },

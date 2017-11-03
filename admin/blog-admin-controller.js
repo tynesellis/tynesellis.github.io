@@ -99,6 +99,7 @@ document.getElementById("searchBlogs").addEventListener("keyup", function () {
         })
         let printedResults = ``;
         searchResults.forEach(function (searchObj) {
+            console.log(searchObj)
             printedResults += `
             <article class="searchedBlogResults contentBoxes">  
                 <h4>${searchObj.name}</h4>
@@ -116,8 +117,6 @@ document.getElementById("searchBlogs").addEventListener("keyup", function () {
             resultButton.addEventListener("click", function (event) {
                 bloggyHTML.innerHTML = "";//clear out whatever is on the page
                     retrievedBlogDBAdmin.forEach(function(blogObj){
-                        console.log(blogObj)
-                        console.log(event.target)
                         if (blogObj.blogID.toString() === event.target.id) {
                             bloggyHTML.innerHTML += `
                             <h1>${blogObj.name}</h1>
