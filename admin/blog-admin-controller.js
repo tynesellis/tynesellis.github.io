@@ -9,7 +9,19 @@ let blogTitletoEdit = document.getElementById("editBlogTitle");//get title secti
 let blogTexttoEdit = document.getElementById("editBlogText");//get text section of add/edit modal
 let blogDatetoEdit = document.getElementById("editBlogDate");//get date section of add/edit modal
 
-
+const blogEditEvent = function () {
+    const blogEditButtons = document.getElementsByClassName("editBlog");//get array of the edit buttons
+    Array.from(blogEditButtons).forEach(function (button) {
+        button.addEventListener("click", function (event) {
+            let matchingBlog = retrievedBlogDBAdmin.find(blog =>
+                blog.blogID == event.target.id)
+            blogIDtoEdit.value = matchingBlog.blogID;
+            blogTitletoEdit.value = matchingBlog.name;
+            blogDatetoEdit.value = matchingBlog.published;
+            blogTexttoEdit.value = matchingBlog.text;
+        })
+    });
+}
 // -------------------------pagination construction------------------------------------
 let paginationContent = "<ul class='d-flex flex-row' id='paginate'>";//start the ul that will contain the pageinator
 paginationContent += "<a href='#' id='back' class=''>&lt;</a>";//add the back button
@@ -29,7 +41,7 @@ const nextHTML = document.getElementById("next");
 
 // ---------------------Pagination On Click Function-----------------------------
 
-function addBlogzAdmin (event) {
+function addBlogzAdmin(event) {
     bloggyHTML.innerHTML = "";//clear out whatever is on the page
     const buttonNumber = parseInt(//get the number of the button clicked and Steve's invitation to visit MDN
         Array.from(event.target.classList)//make an array from returned classList
@@ -64,9 +76,7 @@ function addBlogzAdmin (event) {
             <article>${currentBlog.text}</article>
             <button type="button" id="${currentBlog.blogID}" class="editBlog btn btn-primary" data-toggle="modal" data-target="#blogEditor">Edit</button>        `
     })
-
-
-
+    blogEditEvent();
 }
 
 // ---------------------End On Click Function-----------------------------
@@ -99,7 +109,6 @@ document.getElementById("searchBlogs").addEventListener("keyup", function () {
         })
         let printedResults = ``;
         searchResults.forEach(function (searchObj) {
-            console.log(searchObj)
             printedResults += `
             <article class="searchedBlogResults contentBoxes">  
                 <h4>${searchObj.name}</h4>
@@ -115,64 +124,28 @@ document.getElementById("searchBlogs").addEventListener("keyup", function () {
         for (let b = 0; b < searchResultButtons.length; b++) {
             let resultButton = searchResultButtons[b];
             resultButton.addEventListener("click", function (event) {
+                document.getElementById("searchBlogs").value = "";
                 bloggyHTML.innerHTML = "";//clear out whatever is on the page
-                    retrievedBlogDBAdmin.forEach(function(blogObj){
-                        if (blogObj.blogID.toString() === event.target.id) {
-                            bloggyHTML.innerHTML += `
+                retrievedBlogDBAdmin.forEach(function (blogObj) {
+                    if (blogObj.blogID.toString() === event.target.id) {
+                        bloggyHTML.innerHTML += `
                             <h1>${blogObj.name}</h1>
                             <h2>Date: ${blogObj.published}</h2>
                             <article>${blogObj.text}</article>
-                            <button id="${blogObj.blogID}" type="button" class="editBlog btn btn-primary" data-toggle="modal" data-target="blogEditor">Edit</button>
+                            <button id="${blogObj.blogID}" type="button" class="editBlog btn btn-primary" data-toggle="modal" data-target="#blogEditor">Edit</button>
                         `;
-                        }
-                    })
+                    }
+                    blogEditEvent();
+                })
             })
-        }
+        } 
     }
 })
 
 
 
-//run at beginning of page load============================
-addBlogzAdmin({
-    "target": {
-        "classList": ["page-1"]
-    }
-})
-// const blogIdGenerator = function* () {
-//     let uniqueId = 7
 
-//     while (true) {
-//         yield uniqueId
-//         uniqueId += 1
-//     }
-// }
-// const blogIdFactory = blogIdGenerator()
-
-// //get new blogs from modal input and add them to DB
-
-// const generateBlog = function (id, title, date, text) {//factory for blog objects that match database structure
-//     return Object.create(null, {
-//         "blogId": {
-//             enumerable: true,
-//             value: id
-//         },
-//         "name": {
-//             enumerable: true,
-//             value: title
-//         },
-//         "published": {
-//             enumerable: true,
-//             value: date
-//         },
-//         "text": {
-//             enumerable: true,
-//             value: text
-//         }
-//     })
-// };
-
-
+//=================Add blog ========================
 
 document.getElementById("addBlog").addEventListener("click", function () {//listen for click on the button that opens a new blog form
     let addedBlogTitle = document.getElementById("newBlogTitle");//get title section of add/edit modal
@@ -184,30 +157,35 @@ document.getElementById("addBlog").addEventListener("click", function () {//list
     addedBlogTitle.value = "";
     addedBlogText.value = "";
     addedBlogDate.value = "";
+    addBlogzAdmin({
+        "target": {
+            "classList": ["page-1"]
+        }
+    })
 })
 
 //================listener events for edit buttons========================
-    const blogEditButtons = document.getElementsByClassName("editBlog");//get array of the edit buttons
 
-    Array.from(blogEditButtons).forEach(function(button){
-        button.addEventListener("click", function(event){
-            let matchingBlog = retrievedBlogDBAdmin.find(blog =>
-            blog.blogID == event.target.id)
-            blogIDtoEdit.value = matchingBlog.blogID;
-            blogTitletoEdit.value = matchingBlog.name;
-            blogDatetoEdit.value = matchingBlog.published;
-            blogTexttoEdit.value = matchingBlog.text;
-        })
-    });
 
 //edit functions ================================
-document.getElementById("submitEdit").addEventListener("click", function(event){
-    let editedBlog = generateBlog(blogIDtoEdit.value, blogTitletoEdit.value, blogDatetoEdit.value, blogTexttoEdit.value);
-    console.log(editedBlog)
+document.getElementById("submitEdit").addEventListener("click", function () {
+    let editedBlog = generateBlog(parseInt(blogIDtoEdit.value), blogTitletoEdit.value, blogDatetoEdit.value, blogTexttoEdit.value);
     let blogToReplaceIndex = retrievedBlogDBAdmin.findIndex(blog =>
-        editedBlog.id == blog.id
-    )
-    console.log(blogToReplaceIndex)
+        editedBlog.blogID === blog.blogID
+    );
+    retrievedBlogDBAdmin.splice(blogToReplaceIndex, 1, editedBlog);
+    localStorage.setItem("blogString", JSON.stringify(retrievedBlogDBAdmin));//send the updated array back to storage
+    addBlogzAdmin({
+        "target": {
+            "classList": ["page-1"]
+        }
+    })
 })
 
+//run at beginning of page load============================
+addBlogzAdmin({
+    "target": {
+        "classList": ["page-1"]
+    }
+})
 
