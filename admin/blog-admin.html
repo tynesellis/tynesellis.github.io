@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">    
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../blog/blog-styles.css">    
   </head>
   <body>
       <nav id="nav" class="navbar navbar-expand-lg navbar-dark">
@@ -40,36 +41,68 @@
           <header id="jumbotron" class="container jumbotron mb-3 boxShadow">
             <img id="headShot" class="img-rounded float-left mr-3" src="../images/hs-pic.jpg" height="80" width="auto">
             <h1 class="headerText">Welcome Admin</h1>
-            <h5 class="text-muted headerText">Add Blogs Below</h5>
+            <h5 class="text-muted headerText">Add or Edit Blogs Below</h5>
           </header>
+          <!-- Edit blog modal -->
+          <div class="modal" tabindex="-1" role="dialog" id="blogEditor">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Blog Magic Happens Here</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body d-flex flex-column">
+                    <input id="editBlogID" disabled></input>
+                    <input type="text" id="editBlogTitle"></input>
+                    <input type="text" id="editBlogDate"></input>
+                    <textarea id="editBlogText" rows="15"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" id ="submitEdit" class="btn btn-primary" data-dismiss="modal">Submit Edit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           <!-- Add blog modal -->
           <div class="modal" tabindex="-1" role="dialog" id="bloggyBlog">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">New Blog</h5>
+                  <h5 class="modal-title">Blog Magic Happens Here</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body d-flex flex-column">
                   <input type="text" id="newBlogTitle" placeholder="Blog Title Here"></input>
-                  <input type="date" id="newBlogDate" placeholder="Date Here"></input>
+                  <input type="text" id="newBlogDate" placeholder="Date Here"></input>
                   <textarea id="newBlogText" rows="15" placeholder="New Blog Here"></textarea>
                 </div>
                 <div class="modal-footer">
                   <button type="button" id ="addBlog" class="btn btn-primary" data-dismiss="modal">Add blog</button>
-                  <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
                 </div>
               </div>
             </div>
           </div>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bloggyBlog">
+          <button id="revealModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#bloggyBlog">
             Add a blog
           </button>
           <!-- end Add blog modal -->
+          <div class="container mt-3 pb-5">
+              <label for="searchBlogs">Search Blogs:</label>  
+            <input type="text" id="searchBlogs">
+            </div>
+          <section class="d-flex flex-column mb-5"id="articles">
+            
+            <!-- new articles to go here --> 
+          
+          
+        </section>
           
       <footer id="footer" class="container-fluid fixed-bottom text-center bg-light">
+          <section id="blogPageinator" class="d-flex align-items-center justify-content-center"></section> 
         <p class="container-fluid pt-2">Paul Ellis | Nashville, Tennessee | <a href="mailto: tynesellis@icloud.com">tynesellis@icloud.com</a></p>
       </footer>
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -77,5 +110,8 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
       <script src="./blog-admin-factory.js"></script>
       <script src="./blog-admin-controller.js"></script>
+      <script src="../blog/scripts/blog-factory.js"></script>
+      
+
     </body>
 </html>
