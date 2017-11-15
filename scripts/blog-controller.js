@@ -1,7 +1,9 @@
-const retrievedBlogDB = JSON.parse(localStorage.getItem("blogString"));//get blog DB from storage(array of objects)
+const db = require("./database");
+const database = db.load();
+
 const bloggyHTML = document.getElementById("articles");//target section for blogs
 const blogPagenatorHTML = document.getElementById("blogPageinator");//target section for pageinator
-const numberOfBlogs = retrievedBlogDB.length;//How many blogs there are
+const numberOfBlogs = database.blogs.length;//How many blogs there are
 const blogsPerPage = 1;//how many we want to display at a time
 const howManyPages = Math.ceil(numberOfBlogs / blogsPerPage);//calculate how many pages there will be of blogs
 
@@ -46,13 +48,13 @@ function addBlogz(event) {
         nextHTML.style.display = "inline";// if you're on any button other than the last one, display next arrow and set page class to next page
         nextHTML.className = `page-${buttonNumber + 1}`
     }
-    //--------------write to page---------------
-    const blogsToDisplay = retrievedBlogDB.slice(//set the blogs you want to display
+    // --------------write to page---------------
+    const blogsToDisplay = database.blogs.slice(//set the blogs you want to display
         (buttonNumber - 1) * blogsPerPage, //buttonNumber, drawn from class name - 1, since it's an array * however many we want -- set above
         buttonNumber * blogsPerPage//stopping point
     )
 
-    blogsToDisplay.forEach(function (currentBlog) {
+    database.blogs.forEach(currentBlog => {
         bloggyHTML.innerHTML += `
             <h1>${currentBlog.name}</h1>
             <h2>Date: ${currentBlog.published}</h2>
@@ -85,7 +87,7 @@ nextHTML.addEventListener("click", addBlogz)
 document.getElementById("searchBlogs").addEventListener("keyup", function () {
     let searchString = event.target.value.toLowerCase();
     if (searchString.length >= 3) {
-        const searchResults = retrievedBlogDB.filter(function (checkedBlog) {
+        const searchResults = database.blogs.filter(function (checkedBlog) {
             for (let key in checkedBlog) {
                 if (checkedBlog[key].toString().toLowerCase().includes(searchString)) {
                     return checkedBlog;
@@ -110,7 +112,7 @@ document.getElementById("searchBlogs").addEventListener("keyup", function () {
             let resultButton = searchResultButtons[b];
             resultButton.addEventListener("click", function (event) {
                 bloggyHTML.innerHTML = "";//clear out whatever is on the page
-                    retrievedBlogDB.forEach(function(blogObj){
+                    database.blogs.forEach(function(blogObj){
                         if (blogObj.blogID.toString() === event.target.id) {
                             bloggyHTML.innerHTML += `
                             <h1>${blogObj.name}</h1>
@@ -132,3 +134,4 @@ addBlogz({
         "classList": ["page-1"]
     }
 })
+

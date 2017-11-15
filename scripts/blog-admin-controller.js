@@ -1,10 +1,10 @@
 const db = require("./database")
+const database = db.load();
 const generateBlog = require("./blog-factory");
 const blogEditEvent = require("./blogEditEvent")
-const retrievedBlogDBAdmin = JSON.parse(localStorage.getItem("blogString"));//get blog DB from storage(array of objects)
-const bloggyHTML = document.getElementById("articles");//target section for blogs
-const blogPagenatorHTML = document.getElementById("blogPageinator");//target section for pageinator
-const numberOfBlogs = retrievedBlogDBAdmin.length;//How many blogs there are
+const bloggyHTML = document.getElementById("articlesAdmin");//target section for blogs
+const blogPagenatorHTML = document.getElementById("blogPageinatorAdmin");//target section for pageinator
+const numberOfBlogs = database.blogs.length;//How many blogs there are
 const blogsPerPage = 1;//how many we want to display at a time
 const howManyPages = Math.ceil(numberOfBlogs / blogsPerPage);//calculate how many pages there will be of blogs
 let blogIDtoEdit = document.getElementById("editBlogID");//get date section of add/edit modal    
@@ -55,7 +55,7 @@ function addBlogzAdmin(event) {
         nextHTML.className = `page-${buttonNumber + 1}`
     }
     //--------------write to page---------------
-    const blogsToDisplay = retrievedBlogDBAdmin.slice(//set the blogs you want to display
+    const blogsToDisplay = database.blogs.slice(//set the blogs you want to display
         (buttonNumber - 1) * blogsPerPage, //buttonNumber, drawn from class name - 1, since it's an array * however many we want -- set above
         buttonNumber * blogsPerPage//stopping point
     )
@@ -91,7 +91,7 @@ nextHTML.addEventListener("click", addBlogzAdmin)
 document.getElementById("searchBlogs").addEventListener("keyup", function () {
     let searchString = event.target.value.toLowerCase();
     if (searchString.length >= 3) {
-        const searchResults = retrievedBlogDBAdmin.filter(function (checkedBlog) {
+        const searchResults = database.blogs.filter(function (checkedBlog) {
             for (let key in checkedBlog) {
                 if (checkedBlog[key].toString().toLowerCase().includes(searchString)) {
                     return checkedBlog;
@@ -117,7 +117,7 @@ document.getElementById("searchBlogs").addEventListener("keyup", function () {
             resultButton.addEventListener("click", function (event) {
                 document.getElementById("searchBlogs").value = "";
                 bloggyHTML.innerHTML = "";//clear out whatever is on the page
-                retrievedBlogDBAdmin.forEach(function (blogObj) {
+                database.blogs.forEach(function (blogObj) {
                     if (blogObj.blogID.toString() === event.target.id) {
                         bloggyHTML.innerHTML += `
                             <h1>${blogObj.name}</h1>
@@ -143,8 +143,8 @@ document.getElementById("addBlog").addEventListener("click", function () {//list
     let addedBlogText = document.getElementById("newBlogText");//get text section of add/edit modal
     let addedBlogDate = document.getElementById("newBlogDate");//get date section of add/edit modal
     const newestBlog = generateBlog(blogIdFactory.next().value, addedBlogTitle.value, addedBlogDate.value, addedBlogText.value);//pass values above into blog factory
-    retrievedBlogDBAdmin.unshift(newestBlog);//push the new blog to the front of the line in the blog array
-    localStorage.setItem("blogString", JSON.stringify(retrievedBlogDBAdmin));//send the updated array back to storage
+    database.blogs.unshift(newestBlog);//push the new blog to the front of the line in the blog array
+    localStorage.setItem("blogString", JSON.stringify(database.blogs));//send the updated array back to storage
     addedBlogTitle.value = "";
     addedBlogText.value = "";
     addedBlogDate.value = "";
@@ -161,11 +161,11 @@ document.getElementById("addBlog").addEventListener("click", function () {//list
 //edit functions ================================
 document.getElementById("submitEdit").addEventListener("click", function () {
     let editedBlog = generateBlog(parseInt(blogIDtoEdit.value), blogTitletoEdit.value, blogDatetoEdit.value, blogTexttoEdit.value);
-    let blogToReplaceIndex = retrievedBlogDBAdmin.findIndex(blog =>
+    let blogToReplaceIndex = database.blogs.findIndex(blog =>
         editedBlog.blogID === blog.blogID
     );
-    retrievedBlogDBAdmin.splice(blogToReplaceIndex, 1, editedBlog);
-    localStorage.setItem("blogString", JSON.stringify(retrievedBlogDBAdmin));//send the updated array back to storage
+    database.blogs.splice(blogToReplaceIndex, 1, editedBlog);
+    localStorage.setItem("blogString", JSON.stringify(database.blogs));//send the updated array back to storage
     addBlogzAdmin({
         "target": {
             "classList": ["page-1"]

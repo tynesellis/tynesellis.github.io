@@ -10,4 +10,4 @@ const Database = Object.create(null, {
     }
 })
 
-module.exports = database
+module.exports = Database
