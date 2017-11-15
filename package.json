@@ -26,5 +26,8 @@
     "grunt-contrib-watch": "^1.0.0",
     "gruntify-eslint": "^4.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "grunt-browserify": "^5.2.0",
+    "grunt-eslint": "^20.1.0"
+  }
 }

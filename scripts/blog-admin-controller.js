@@ -1,3 +1,6 @@
+const db = require("./database")
+const generateBlog = require("./blog-factory");
+const blogEditEvent = require("./blogEditEvent")
 const retrievedBlogDBAdmin = JSON.parse(localStorage.getItem("blogString"));//get blog DB from storage(array of objects)
 const bloggyHTML = document.getElementById("articles");//target section for blogs
 const blogPagenatorHTML = document.getElementById("blogPageinator");//target section for pageinator
@@ -9,19 +12,7 @@ let blogTitletoEdit = document.getElementById("editBlogTitle");//get title secti
 let blogTexttoEdit = document.getElementById("editBlogText");//get text section of add/edit modal
 let blogDatetoEdit = document.getElementById("editBlogDate");//get date section of add/edit modal
 
-const blogEditEvent = function () {
-    const blogEditButtons = document.getElementsByClassName("editBlog");//get array of the edit buttons
-    Array.from(blogEditButtons).forEach(function (button) {
-        button.addEventListener("click", function (event) {
-            let matchingBlog = retrievedBlogDBAdmin.find(blog =>
-                blog.blogID == event.target.id)
-            blogIDtoEdit.value = matchingBlog.blogID;
-            blogTitletoEdit.value = matchingBlog.name;
-            blogDatetoEdit.value = matchingBlog.published;
-            blogTexttoEdit.value = matchingBlog.text;
-        })
-    });
-}
+
 // -------------------------pagination construction------------------------------------
 let paginationContent = "<ul class='d-flex flex-row' id='paginate'>";//start the ul that will contain the pageinator
 paginationContent += "<a href='#' id='back' class=''>&lt;</a>";//add the back button
