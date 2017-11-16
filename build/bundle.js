@@ -1,4 +1,61 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+//Author: Paul Ellis; Purpose: Main db of innerHTML to be populated on click events
+
+const main = require("./mainHTML");
+
+const innerHTMLDB = [main];
+
+module.exports = innerHTMLDB
+},{"./mainHTML":2}],2:[function(require,module,exports){
+//Author: Paul Ellis; Purpose: Main page html to be loaded on request
+
+const mainHTML = {
+    "id": {
+        enumerable: true,
+        value: "nav_home"
+    },
+    "inner": {
+        enumerable: true,
+        value: `
+        <header id="jumbotron" class="d-flex flex-row jumbotron mb-3 mt-3 mr-5 ml-5 boxShadow">
+        <div>
+          <img id="headShot" class="img-rounded float-left mr-3" src="../images/hs-pic.jpg">
+        </div>
+        <div class="d-flex flex-column justify-content-center">
+          <h1 class="headerText">Paul Ellis</h1>
+          <h5 class="text-muted headerText">Junior Developer Apprentice</h5>
+        </div>
+      </header>
+      <div class="container mt-3">
+  
+        <div id="mainText" class="container-fluid row mt-4 mb-5 pb-5 contentBoxes">
+          <blockquote id="pullQuote" class="col-md-4 text-center">"I get my greatest sense of accomplishment in understanding and then providing for a need, and I love the idea of
+            earning a living by creating and maintaining something genuinely needed." </blockquote>
+          <article class="col-md-8 text-left pt-1 pl-4 ">Hi! I’m Paul, and yes, that photo is actually me from the 90s.
+            <br>
+            <br>I’ve lived in Nashville since 2001 and worked in law enforcement since 2008. After nearly a decade in the field,
+            I was ready for a change. The question was: What career could still challenge me and provide a way to serve the
+            Nashville community?
+            <br>
+            <br> Coding.
+            <br>
+            <br>While considering my career change, I heard about Nashville Software School at a dinner and started looking into
+            it. Of course the demand and good pay of the field got my attention, but what really drew me in was the dignity
+            in the work. I read an article that said coding is the new blue collar field. For some people “blue collar” might
+            be an insult, but I find that kind of work honorable, satisfying, and sadly rare in the job market. It’s honest,
+            needed, skilled work for creative thinkers. I get my greatest sense of accomplishment in understanding and then
+            providing for a need, and I love the idea of earning a living by creating and maintaining something genuinely needed.
+            Beyond that, I get energy from being around people and do some of my best thinking with others…and from what I
+            hear, coding is a team sport. Maybe I can join your team. </article>
+        </div>
+  
+      </div>
+        `
+    }
+}
+
+module.exports = mainHTML
+},{}],3:[function(require,module,exports){
 const db = require("./database")
 const database = db.load();
 const generateBlog = require("./blog-factory");
@@ -182,9 +239,9 @@ addBlogzAdmin({
 })
 
 
-},{"./blog-factory":4,"./blogEditEvent":5,"./database":8}],2:[function(require,module,exports){
+},{"./blog-factory":6,"./blogEditEvent":7,"./database":10}],4:[function(require,module,exports){
 
-},{}],3:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 const db = require("./database");
 const database = db.load();
 
@@ -323,7 +380,7 @@ addBlogz({
 })
 
 
-},{"./database":8}],4:[function(require,module,exports){
+},{"./database":10}],6:[function(require,module,exports){
 const db = require("./database");
 const database = db.load();
 
@@ -371,7 +428,7 @@ generateBlog(blogIdFactory.next().value, "Week Filler 2", "10/zz/2017", "These a
 generateBlog(blogIdFactory.next().value, "Week Filler 3", "10/zz/2017", "Pooping rainbow while flying in a toasted bread costume in space chase ball of string chew foot, and poop on grasses. Why must they do that flop over. Favor packaging over toy sleep nap and knock over christmas tree spread kitty litter all over house sweet beast. Use lap as chair give attitude poop on grasses sleep nap. Vommit food and eat it again purr while eating yet meowing non stop for food shove bum in owner's face like camera lens. Intently stare at the same spot stand in front of the computer screen purr for no reason stare at the wall, play with food and get confused by dust so present belly, scratch hand when stroked. Intrigued by the shower have secret plans. Sweet beast find something else more interesting, or stare at ceiling. Leave dead animals as gifts find something else more interesting. Lick butt. Sleep in the bathroom sink why must they do that. Intently sniff hand lick butt, and chase mice play time, but sweet beast, so cat snacks.")
 generateBlog(blogIdFactory.next().value, "Week Filler 4", "10/zz/2017", "They were four men living all together yet they were all alone. Fish don't fry in the kitchen and beans don't burn on the grill. Took a whole lotta tryin' just to get up that hill. Well we're movin' on up to the east side to a deluxe apartment in the sky. A man is born he's a man of means. Then along come two they got nothin' but their jeans. In a freak mishap Ranger 3 and its pilot Captain William Buck Rogers are blown out of their trajectory into an orbit which freezes his life support systems and returns Buck Rogers to Earth five-hundred years later. Fleeing from the Cylon tyranny the last Battlestar – Galactica - leads a rag-tag fugitive fleet on a lonely quest - a shining planet known as Earth.")
 
-},{"./database":8}],5:[function(require,module,exports){
+},{"./database":10}],7:[function(require,module,exports){
 const blogEditEvent = () => {
     const blogEditButtons = document.getElementsByClassName("editBlog");//get array of the edit buttons
     Array.from(blogEditButtons).forEach(button => {
@@ -384,7 +441,7 @@ const blogEditEvent = () => {
         })
     });
 }
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 const retrievedContactsDB = JSON.parse(localStorage.getItem("contactsString"));//retrieve string from storage and parse it
 let contactsHTML = document.getElementById("contact-info"); //target area of DOM to which we will send data
 
@@ -399,7 +456,7 @@ for (let arr in retrievedContactsDB) { //cycle through the object returned from 
         `  
     }    
 }  
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 //object for different contact methods
 const contactObject = [
     {
@@ -434,7 +491,7 @@ localStorage.setItem("contactsString", conactDBString);//set string in storage
 
 
 
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 const Database = Object.create(null, {
     load: {
         value: () => JSON.parse(localStorage.getItem("Database")) || {}
@@ -448,11 +505,46 @@ const Database = Object.create(null, {
 })
 
 module.exports = Database
-},{}],9:[function(require,module,exports){
-// const writeBlogs = require("./blog-factory");
-const addBlogz = require("./blog-controller");
-const resumePush = require("./resume-factory")
-},{"./blog-controller":3,"./resume-factory":13}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
+//Author: Paul Ellis; Purpose: Object of listeners
+
+const listeners = {
+    "nav": {
+        value: (f) => Array.from(document.getElementsByClassName("nav-link")).forEach(link => link.addEventListener("click", f))
+    }
+}
+
+module.exports = listeners
+},{}],12:[function(require,module,exports){
+//Author: Paul Ellis; Purpose: Function to get innerHTML to be populated
+
+const innerHTMLDB = require("../innerHTML/innerHTMLDB")
+
+const getAndLoad = () => {
+    const targetDiv = document.getElementById("target");
+    const match = innerHTMLDB.find(mod => event.target.id === mod.id.value)
+    targetDiv.innerHTML = match.inner.value;
+}
+
+module.exports = getAndLoad
+},{"../innerHTML/innerHTMLDB":1}],13:[function(require,module,exports){
+//Author: Paul Ellis; Purpose: Function to populate pages
+
+const listeners = require("./listeners")
+const load = require("./load-mod")
+
+const loaders = {
+    "loader": {
+        value: () => listeners.nav(load)
+    }
+}
+
+module.exports = loaders
+},{"./listeners":11,"./load-mod":12}],14:[function(require,module,exports){
+const listenLoad = require("./loaders");
+
+console.log("hi")
+},{"./loaders":13}],15:[function(require,module,exports){
 const retrievedProjectsDB = JSON.parse(localStorage.getItem("projectsDBLocal")); //retrieve and parse from browser storage
 const projectsHTML = document.getElementById("projects"); //target area of DOM that converted data will be written
 const backButtonHTML = document.getElementById("backItUp");//return to full list option during search
@@ -544,7 +636,7 @@ searchBar.addEventListener("keyup", function () {//listen for keyup event in sea
 
 
     
-},{}],11:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 const ProjectsIdGenerator = function* () {
     let uniqueId = 7
 
@@ -607,7 +699,7 @@ const projectsDBString = JSON.stringify(projectsObjects); //convert projectsDB t
 localStorage.setItem("projectsDBLocal", projectsDBString); // send to browser storage
 
 
-},{}],12:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 const retrievedResume = JSON.parse(localStorage.getItem("resumeDB"));//retrieve DB of resume information in an array
 let resumeHTML = document.getElementById("resume");//targets area of DOM to send new content
 
@@ -650,7 +742,7 @@ for (let obj = 0; obj < retrievedResume.length; obj++) {
 
 
 
-},{}],13:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 const db = require("./database");
 const database = db.load();
 database.resume = database.resume || [];
@@ -676,4 +768,4 @@ console.log("hi")
 db.save(database, "resume")}
 
 module.exports = resumePush()
-},{"./database":8}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13]);
+},{"./database":10}]},{},[3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]);

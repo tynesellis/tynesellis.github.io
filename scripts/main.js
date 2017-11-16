@@ -1,3 +1,3 @@
-// const writeBlogs = require("./blog-factory");
-const addBlogz = require("./blog-controller");
-const resumePush = require("./resume-factory")
+const listenLoad = require("./loaders");
+
+console.log("hi")
