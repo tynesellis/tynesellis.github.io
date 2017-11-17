@@ -4,9 +4,7 @@ const listeners = require("./listeners")
 const load = require("./load-mod")
 
 const loaders = {
-    "loader": {
-        value: () => listeners.nav(load)
-    }
+    "load": {value: listeners.nav.value()}
 }
 
 module.exports = loaders
