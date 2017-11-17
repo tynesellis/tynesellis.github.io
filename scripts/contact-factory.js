@@ -1,5 +1,5 @@
 //object for different contact methods
-const contactObject = [
+const contactArray = [
     {
     type: "Email",
     URL: "mailto:tynesellis@icloud.com",
@@ -22,12 +22,5 @@ const contactObject = [
     }
 ]
 
-//object to send to JSON/browser storage
-const contactDB = {
-    "contacts": contactObject
-}
-
-const conactDBString = JSON.stringify(contactDB);//change object into string for browser storage
-localStorage.setItem("contactsString", conactDBString);//set string in storage
-
+module.exports = contactArray
 

@@ -185,19 +185,89 @@ const resumeHTML = {
         </div>
     </header> 
     
-    <div class="container mt-3">
-            
-      <section id="resume" class="d-flex flex-column pb-5 contentBoxes">
-        
+    <div class="container mt-3">        
+        <section id="resume" class="d-flex flex-column pb-5 contentBoxes">
+            <article class="d-flex flex-column" id="resumeHead">
+                <h1 class="resumeTags">Paul Ellis</h1>
+                <h5 class="resumeTags"><a id="email" href="mailto:tynesellis@icloud.com">tynesellis@icloud.com</a></h5>
+                <h2 class="resumeTags sectionHeads">Professional Experience</h2>
+            </article>
 
-      </section>
-  </div>
+        <article class="d-flex flex-column" id="mnpd">
+            <h3 class="resumeTags">Metropolitan Nashville Police Department</h3>
+            <h5 class="resumeTags">Dates of Employment: June, 2008 - September, 2017</h5>
+            <h4 class="resumeTags">Roles within the Department:</h4>
+            <h5 class="resumeTags">Field Operations Bureau | Patrol Officer</h5>
+            <h5 class="resumeTags">Field Operations Bureau | Midnight Flex Team Officer</h5>
+            <h5 class="resumeTags">Criminal Investigations Division | Domestic Violence Detective</h5>
+        </article>
+
+        <article class="d-flex flex-column" id="dell">
+            <h3 class="resumeTags">Dell, Inc.</h3>
+            <h5 class="resumeTags">Dates of Employment: July, 2006 - June, 2008</h5>
+            <h4 class="resumeTags">Roles within the Department:</h4>
+            <h5 class="resumeTags">Sales Representative | Business Sales Division</h5>
+            <h5 class="resumeTags">Account Manager | Business Sales Division</h5>
+        </article>
+
+        <article class="d-flex flex-column" id="education">    
+            <h2 class="resumeTags sectionHeads">Education</h2>
+            <h5 class="resumeTags">Lipscomb University</h5>
+            <h5 class="resumeTags">B.A. Communications | Journalism Concentration | Public Relations Minor</h5>
+        </article>
+
+        </section>
+    </div>
         `
     }
 }
 
 module.exports = resumeHTML
 },{}],7:[function(require,module,exports){
+const contacts = require("./contact-factory")
+
+const contactsPop = () => {
+    let contactsHTML = "";
+    contacts.forEach(contact => { //cycle through array of contacts
+        //add li to ul on contacts page with infor from each contact
+        contactsHTML += ` 
+        <li>${contact.service}: <a href=${contact.URL}>${contact.userName}</a></li>
+        <hr>
+        `
+    })
+    $("#contactList").html(contactsHTML)
+}
+
+module.exports = contactsPop
+},{"./contact-factory":8}],8:[function(require,module,exports){
+//object for different contact methods
+const contactArray = [
+    {
+    type: "Email",
+    URL: "mailto:tynesellis@icloud.com",
+    service: "Email",
+    userName: "tynesellis@icloud.com"
+    },
+
+    {
+    type: "Social Media",
+    URL: "https://twitter.com/tynesellis",
+    service: "Twitter",
+    userName: "@tynesellis"
+    },
+
+    {
+    type: "Social Media",
+    URL: "https://www.linkedin.com/in/paul-ellis-110a44149/",
+    service: "Linkedin",
+    userName: "Paul Ellis"
+    }
+]
+
+module.exports = contactArray
+
+
+},{}],9:[function(require,module,exports){
 //Author: Paul Ellis; Purpose: Object of listeners
 const loadMods = require("./load-mods");
 
@@ -209,21 +279,25 @@ const listeners = {
 }
 
 module.exports = listeners
-},{"./load-mods":8}],8:[function(require,module,exports){
+},{"./load-mods":10}],10:[function(require,module,exports){
 //Author: Paul Ellis; Purpose: Function to get innerHTML to be populated
 
 const innerHTMLDB = require("../innerHTML/innerHTMLDB")
+const contact = require("./contact-controller")
 
 const loaders = {
-    "pageLoads": (event) => {$("#target").html(innerHTMLDB.find(mod => event.target.id === mod.id.value).inner.value)},
+    "pageLoads": (event, pop) => {
+        $("#target").html(innerHTMLDB.find(mod => event.target.id === mod.id.value).inner.value)
+        contact()
+    },
     "homeLoad": () => {$("#target").html(innerHTMLDB.find(mod => mod.id.value === "nav_home").inner.value)}
 }
 
 module.exports = loaders
-},{"../innerHTML/innerHTMLDB":3}],9:[function(require,module,exports){
+},{"../innerHTML/innerHTMLDB":3,"./contact-controller":7}],11:[function(require,module,exports){
 const loadMods = require("./load-mods");//object of load methods
 const listener = require("./listeners");//object of listener methods
 
 loadMods.homeLoad();//load landing page content when site is first visited
 listener.nav()//listens for click event on any of the nav links. on event, loads that page's content
-},{"./listeners":7,"./load-mods":8}]},{},[9]);
+},{"./listeners":9,"./load-mods":10}]},{},[11]);
